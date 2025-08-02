@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outlet Teknik (OT) - Dari Mahasiswa, Untuk Mahasiswa</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        /* Palet Warna: Blueprint Modern */
+        :root {
+            --primary-blue: #0A2647;
+            --accent-orange: #FF7B00;
+            --neutral-light: #F5F7FA;
+            --neutral-dark: #333333;
+            --text-light: #FFFFFF;
+            --card-bg: #FFFFFF;
+            --shadow: rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Reset dan Pengaturan Dasar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ================================== */
+        /* === PERUBAHAN CSS DIMULAI SINI === */
+        /* ================================== */
+
+        /* Mendorong konten utama ke bawah agar tidak tertutup navbar */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--neutral-light);
+            color: var(--neutral-dark);
+            padding-top: 60px; /* PENTING: Memberi ruang untuk navbar yang fixed */
+            padding-bottom: 80px; /* Ruang untuk bottom nav */
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navbar yang akan tetap di atas (FIXED) */
+        .fixed-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header-logo h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+            letter-spacing: 1.5px;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .header-logo .icon {
+            color: var(--accent-orange);
+            font-size: 1.8rem;
+            vertical-align: middle;
+            margin: 0 5px;
+        }
+
+        /* Bagian Tagline yang bisa di-scroll */
+        .tagline-section {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            padding: 15px 20px 25px 20px;
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .header-tagline {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        /* Konten Utama */
+        .main-content {
+            padding: 20px 0;
+        }
+        
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding: 0 15px;
+        }
+        
+        /* Menu Cepat */
+        .quick-menu {
+            margin-bottom: 25px;
+            padding: 0 15px;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background-color: var(--card-bg);
+            padding: 15px 5px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: transform 0.2s ease;
+        }
+
+        .menu-item:hover { transform: translateY(-5px); }
+
+        .menu-item .icon-wrapper {
+            background-color: #FFF2E5;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .menu-item i {
+            color: var(--accent-orange);
+            font-size: 1.5rem;
+        }
+
+        .menu-item span {
+            font-size: 0.75rem;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+        
+        /* Promo Slider */
+        .promo-slider-section {
+            margin-bottom: 25px;
+        }
+
+        .promo-slider {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 5px 15px 20px 15px;
+            scroll-snap-type: x mandatory;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .promo-slider::-webkit-scrollbar { display: none; }
+
+        .promo-slide {
+            flex: 0 0 85%;
+            background: linear-gradient(45deg, var(--accent-orange), #FFA500);
+            color: var(--text-light);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            scroll-snap-align: start;
+        }
+
+        .promo-slide h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .promo-slide p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .promo-slide .btn {
+            background-color: var(--text-light);
+            color: var(--accent-orange);
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* Produk Unggulan */
+        .products-scroll {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 0 15px 15px 15px;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .products-scroll::-webkit-scrollbar { display: none; }
+
+        .product-card {
+            flex: 0 0 160px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow);
+            overflow: hidden;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            background-color: var(--neutral-light);
+        }
+
+        .product-info { padding: 12px; }
+
+        .product-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 5px;
+        }
+
+        .product-info .price {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+            margin-bottom: 5px;
+        }
+
+        .product-info .seller {
+            font-size: 0.75rem;
+            color: #888;
+        }
+        
+        /* Navigasi Bawah (Bottom Nav) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: var(--card-bg);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 15px var(--shadow);
+            z-index: 1000;
+        }
+
+        .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #999;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link i { font-size: 1.4rem; }
+        .nav-link span { font-size: 0.7rem; font-weight: 500; }
+        .nav-link.active { color: var(--primary-blue); }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed-navbar">
+        <div class="header-logo">
+            <h1>OUTLET<i class="bi bi-gear-fill icon"></i>TEKNIK</h1>
+        </div>
+    </nav>
+
+    <div class="tagline-section">
+        <p class="header-tagline">
+            Pusat Jual Beli Kebutuhan Mahasiswa Teknik. Dari Kita, Untuk Kita. ⚙️
+        </p>
+    </div>
+
+    <main class="main-content">
+        <section class="quick-menu">
+            <h2 class="section-title">Jelajahi Kategori</h2>
+            <div class="menu-grid">
+                <a href="#" class="menu-item"><div class="icon-wrapper"><i class="bi bi-pencil-square"></i></div><span>Alat Tulis</span></a>
+                <a href="#" class="menu-item"><div class="icon-wrapper"><i class="bi bi-controller"></i></div><span>Joki Game</span></a>
+                <a href="#" class="menu-item"><div class="icon-wrapper"><i class="bi bi-phone"></i></div><span>Top Up</span></a>
+                <a href="makanan.html" class="menu-item"><div class="icon-wrapper"><i class="bi bi-egg-fried"></i></div><span>Makanan</span></a>
+                <a href="#" class="menu-item"><div class="icon-wrapper"><i class="bi bi-tools"></i></div><span>Aksesoris</span></a>
+                <a href="#" class="menu-item"><div class="icon-wrapper"><i class="bi bi-award"></i></div><span>Merch</span></a>
+                <a href="#" class="menu-item"><div class="icon-wrapper"><i class="bi bi-plus-circle-fill"></i></div><span>Jual Barang</span></a>
+                <a href="#" class="menu-item"><div class="icon-wrapper"><i class="bi bi-info-circle-fill"></i></div><span>Informasi</span></a>
+            </div>
+        </section>
+
+        <section class="promo-slider-section">
+            <h2 class="section-title">Promo & Info Penting</h2>
+            <div class="promo-slider">
+                <div class="promo-slide">
+                    <h3>Sambut UAS Dengan Siap!</h3>
+                    <p>Diskon hingga 20% untuk semua jasa joki tugas & alat tulis.</p>
+                    <a href="#" class="btn">Lihat Promo</a>
+                </div>
+                <div class="promo-slide">
+                    <h3>Top Up Termurah!</h3>
+                    <p>Bonus diamond & cash back untuk top up game favoritmu.</p>
+                    <a href="#" class="btn">Top Up Sekarang</a>
+                </div>
+                <div class="promo-slide">
+                    <h3>Merchandise Teknik!</h3>
+                    <p>T-Shirt dan stiker edisi terbatas kini tersedia. Stok terbatas!</p>
+                    <a href="#" class="btn">Cek Koleksi</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-products">
+            <h2 class="section-title">Produk Terbaru</h2>
+            <div class="products-scroll">
+                <div class="product-card">
+                    <img src="https://picsum.photos/id/10/300/200" alt="Produk">
+                    <div class="product-info"><h4>Binder Kuliah A5</h4><p class="price">Rp 25.000</p><p class="seller">oleh Ani</p></div>
+                </div>
+                <div class="product-card">
+                    <img src="https://picsum.photos/id/40/300/200" alt="Produk">
+                    <div class="product-info"><h4>Joki Tugas Kalkulus</h4><p class="price">Rp 50.000</p><p class="seller">oleh Joko</p></div>
+                </div>
+                <div class="product-card">
+                    <img src="https://picsum.photos/id/22/300/200" alt="Produk">
+                    <div class="product-info"><h4>Nasi Ayam Geprek</h4><p class="price">Rp 15.000</p><p class="seller">oleh Siti</p></div>
+                </div>
+                <div class="product-card">
+                    <img src="https://picsum.photos/id/17/300/200" alt="Produk">
+                    <div class="product-info"><h4>Gantungan Kunci HMTI</h4><p class="price">Rp 10.000</p><p class="seller">oleh Himpunan</p></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="#" class="nav-link active"><i class="bi bi-house-door-fill"></i><span>Beranda</span></a>
+        <a href="#" class="nav-link"><i class="bi bi-grid-fill"></i><span>Kategori</span></a>
+        <a href="#" class="nav-link"><i class="bi bi-info-circle-fill"></i><span>Tentang</span></a>
+        <a href="#" class="nav-link"><i class="bi bi-person-rolodex"></i><span>Kontak</span></a>
+    </nav>
+    
+    <script>
+        // JavaScript untuk handle state aktif pada navigasi bawah
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                navLinks.forEach(item => item.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
