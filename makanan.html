@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Makanan - Outlet Teknik</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #0A2647;
+            --accent-orange: #FF7B00;
+            --neutral-light: #F5F7FA;
+            --neutral-dark: #333333;
+            --text-light: #FFFFFF;
+            --card-bg: #FFFFFF;
+            --shadow: rgba(0, 0, 0, 0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--neutral-light);
+            padding-top: 60px;
+            padding-bottom: 80px;
+        }
+        a { text-decoration: none; color: inherit; }
+
+        .fixed-navbar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background-color: var(--primary-blue); color: var(--text-light);
+            padding: 12px 20px; display: flex; justify-content: center;
+            align-items: center; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .header-logo h1 {
+            font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem;
+            letter-spacing: 1.5px; margin: 0; line-height: 1;
+        }
+        .header-logo .icon {
+            color: var(--accent-orange); font-size: 1.8rem;
+            vertical-align: middle; margin: 0 5px;
+        }
+        
+        .tagline-section {
+            background-color: var(--primary-blue); color: var(--text-light);
+            padding: 15px 20px 25px 20px; text-align: center;
+            border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;
+        }
+        .header-tagline { font-size: 0.9rem; opacity: 0.85; max-width: 300px; margin: 0 auto; }
+        
+        .page-container { width: 95%; max-width: 800px; margin: 20px auto 0 auto; }
+        .store-group {
+            width: 100%; background-color: var(--card-bg); border-radius: 12px;
+            margin-bottom: 15px; box-shadow: 0 2px 8px var(--shadow); overflow: hidden;
+        }
+        .menu-category {
+            display: flex; align-items: center; padding: 12px 15px; border-bottom: 1px solid #f0f0f0;
+        }
+        .cat-title { font-size: 1rem; font-weight: 600; }
+        .cat-title::before { content: "\f4fc"; font-family: 'bootstrap-icons'; margin-right: 10px; font-weight: normal; }
+        
+        .r-card {
+            width: 100%; min-height: 150px; display: flex; align-items: center;
+            border-bottom: 1px solid #f0f0f0; background: white;
+        }
+        .store-group .r-card:last-of-type { border-bottom: none; }
+        .image-menu {
+            min-width: 120px; width: 120px; height: 120px; margin: 15px;
+            border-radius: 8px; overflow: hidden;
+        }
+        .image-menu img { width: 100%; height: 100%; object-fit: cover; }
+        .info-menu {
+            width: 100%; padding: 20px 15px 20px 0; display: flex; flex-direction: column;
+            justify-content: space-between; gap: 10px;
+        }
+        .menu-title { font-size: 1rem; }
+        .deskripsi-menu { font-size: 0.8rem; color: #666; }
+        .price-menu { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        .menu-price { font-size: 1.1rem; font-weight: bold; color: var(--accent-orange); }
+        .menu-action { display: flex; align-items: center; gap: 8px; }
+        .menu-action .btn {
+            width: 32px; height: 32px; border-radius: 50%; padding: 0;
+            font-size: 16px; border: 1px solid #ddd;
+            background-color: var(--neutral-light); color: var(--neutral-dark);
+        }
+        .jumlah { font-weight: 600; min-width: 20px; text-align: center; }
+
+        .order-fab {
+            position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 500px; z-index: 998; transition: bottom 0.4s ease-in-out;
+        }
+        .order-fab button {
+            width: 100%; height: 50px; background: var(--accent-orange);
+            color: var(--text-light); border: none; border-radius: 25px;
+            font-size: 1rem; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex; justify-content: space-between; align-items: center; padding: 0 20px;
+        }
+
+        .footer-action {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background-color: var(--card-bg); padding: 10px 15px;
+            box-shadow: 0 -2px 15px var(--shadow); z-index: 1000;
+        }
+        .btn-back-home {
+            display: block; width: 100%; text-align: center;
+            background-color: var(--primary-blue); color: var(--text-light);
+            padding: 12px; border-radius: 10px; font-weight: 600;
+        }
+
+        .modal-header, .modal-footer { border: none; }
+        #pesan-wa-btn {
+            background-color: #25D366; color: white; width: 100%; font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <nav class="fixed-navbar">
+        <div class="header-logo">
+            <h1>JAJAN<i class="bi bi-gear-fill icon"></i>TEKNIK</h1>
+        </div>
+    </nav>
+    <div class="tagline-section">
+        <p class="header-tagline">
+            Aneka Jajanan & Makanan Lezat Siap Diantar! 🛵
+        </p>
+    </div>
+    <div class="page-container">
+        <div class="store-group">
+            <div class="menu-category">
+                <div class="cat-title">Always Ready</div>
+            </div>
+            <div class="r-card">
+                <div class="image-menu"><img src="https://picsum.photos/id/22/200" alt="Sus Kering"></div>
+                <div class="info-menu">
+                    <div>
+                        <div class="menu-title"><b>Sus Kering</b></div>
+                        <div class="deskripsi-menu">Isi Coklat</div>
+                    </div>
+                    <div class="price-menu">
+                        <span class="menu-price">5.000</span>
+                        <div class="menu-action">
+                            <button class="btn decrease-btn">-</button>
+                            <div class="jumlah"><b>0</b></div>
+                            <button class="btn increase-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="r-card">
+                <div class="image-menu"><img src="https://picsum.photos/id/42/200" alt="Makaroni"></div>
+                <div class="info-menu">
+                    <div>
+                        <div class="menu-title"><b>Makaroni Pedas</b></div>
+                        <div class="deskripsi-menu">Extra daun jeruk</div>
+                    </div>
+                    <div class="price-menu">
+                        <span class="menu-price">5.000</span>
+                        <div class="menu-action">
+                            <button class="btn decrease-btn">-</button>
+                            <div class="jumlah"><b>0</b></div>
+                            <button class="btn increase-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="order-fab" id="order-fab">
+        <button data-bs-toggle="modal" data-bs-target="#orderModal">
+            <span>Lihat Pesanan</span>
+            <span id="total-price-fab">Rp 0</span>
+        </button>
+    </div>
+    <div class="footer-action">
+        <a href="index.html" class="btn-back-home"><i class="bi bi-arrow-left-circle-fill"></i> Kembali ke Beranda</a>
+    </div>
+
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderModalLabel">Konfirmasi Pesanan Anda</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="modal-order-summary" class="mb-3">
+                        </div>
+                    <h5 class="text-end mb-3">Total: <span id="modal-total-price" class="text-primary-emphasis">Rp 0</span></h5>
+                    
+                    <div class="mb-2">
+                        <label for="customer" class="form-label">Nama Pemesan</label>
+                        <input type="text" id="customer" class="form-control" placeholder="Tulis nama lengkap Anda">
+                    </div>
+                    <div>
+                        <label for="alamat" class="form-label">Alamat / Ruang Kelas Tujuan</label>
+                        <input type="text" id="alamat" class="form-control" placeholder="Contoh: Ruang kelas 4.1 Gedung A">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success w-100" id="pesan-wa-btn">
+                        <i class="bi bi-whatsapp"></i> Kirim Pesanan via WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const allCards = document.querySelectorAll('.r-card');
+        const orderFab = document.getElementById('order-fab');
+        const totalPriceFabEl = document.getElementById('total-price-fab');
+        
+        // Elemen-elemen ini sekarang akan ditemukan karena HTML modal sudah benar
+        const modalOrderSummaryEl = document.getElementById('modal-order-summary');
+        const modalTotalPriceEl = document.getElementById('modal-total-price');
+        const pesanWaBtn = document.getElementById('pesan-wa-btn');
+
+        function updateCart() {
+            let totalPrice = 0;
+            const orderSummary = [];
+
+            allCards.forEach(card => {
+                const jumlah = parseInt(card.querySelector('.jumlah b').innerText);
+                if (jumlah > 0) {
+                    const title = card.querySelector('.menu-title b').innerText;
+                    const priceText = card.querySelector('.menu-price').textContent.trim();
+                    const price = parseInt(priceText.replace(/\./g, ''));
+                    totalPrice += jumlah * price;
+                    orderSummary.push({ title, jumlah });
+                }
+            });
+            
+            totalPriceFabEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+
+            if (totalPrice > 0) {
+                // Posisi tombol disesuaikan agar tidak menutupi footer
+                orderFab.style.bottom = '85px'; 
+            } else {
+                orderFab.style.bottom = '-100px';
+            }
+
+            // Memastikan elemen ada sebelum mengubah isinya
+            if (modalTotalPriceEl) {
+                modalTotalPriceEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+            }
+            if (modalOrderSummaryEl) {
+                modalOrderSummaryEl.innerHTML = '<h6>Rincian:</h6>';
+                if(orderSummary.length > 0) {
+                    const list = document.createElement('ul');
+                    list.classList.add('list-unstyled', 'ms-2');
+                    orderSummary.forEach(item => {
+                        const listItem = document.createElement('li');
+                        listItem.innerText = `- ${item.title} (x${item.jumlah})`;
+                        list.appendChild(listItem);
+                    });
+                    modalOrderSummaryEl.appendChild(list);
+                } else {
+                    modalOrderSummaryEl.innerHTML += '<p class="text-muted">Keranjang Anda kosong.</p>';
+                }
+            }
+        }
+
+        allCards.forEach(card => {
+            card.querySelector('.increase-btn').addEventListener('click', () => {
+                let jumlahEl = card.querySelector('.jumlah b');
+                jumlahEl.innerText = parseInt(jumlahEl.innerText) + 1;
+                updateCart();
+            });
+
+            card.querySelector('.decrease-btn').addEventListener('click', () => {
+                let jumlahEl = card.querySelector('.jumlah b');
+                let jumlah = parseInt(jumlahEl.innerText);
+                if (jumlah > 0) {
+                    jumlahEl.innerText = jumlah - 1;
+                    updateCart();
+                }
+            });
+        });
+
+        // Memastikan tombol ada sebelum menambahkan event listener
+        if (pesanWaBtn) {
+            pesanWaBtn.addEventListener('click', function () {
+                const customer = document.getElementById('customer').value;
+                const alamat = document.getElementById('alamat').value;
+                const total = modalTotalPriceEl.innerText;
+
+                if (customer.trim() === '' || alamat.trim() === '') {
+                    alert('Tolong isi nama dan alamat/ruangan Anda.');
+                    return;
+                }
+
+                let menuItems = [];
+                allCards.forEach(card => {
+                    const jumlah = parseInt(card.querySelector('.jumlah b').innerText);
+                    if (jumlah > 0) {
+                        const title = card.querySelector('.menu-title b').innerText;
+                        menuItems.push(`${title} (x${jumlah})`);
+                    }
+                });
+
+                if (menuItems.length === 0) {
+                    alert('Keranjang Anda kosong!');
+                    return;
+                }
+
+                const whatsappMessage = `Halo Admin Outlet Teknik, saya mau pesan:\n\n*Nama Pemesan:* ${customer}\n*Tujuan Antar:* ${alamat}\n\n*Pesanan:*\n- ${menuItems.join('\n- ')}\n\n*Total Pembayaran:* ${total}\n\nMohon konfirmasi untuk proses pembayarannya. Terima kasih!`;
+                const whatsappUrl = `https://wa.me/6281281865275?text=${encodeURIComponent(whatsappMessage)}`;
+                
+                window.open(whatsappUrl, '_blank');
+            });
+        }
+        
+        // Panggil updateCart sekali di awal untuk menginisialisasi tampilan modal
+        // dengan data yang benar (meskipun kosong)
+        document.addEventListener('DOMContentLoaded', updateCart);
+    </script>
+</body>
+</html>
