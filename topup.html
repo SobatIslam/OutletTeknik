@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Up Game - Outlet Teknik</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #0A2647;
+            --accent-orange: #FF7B00;
+            --neutral-light: #F5F7FA;
+            --neutral-dark: #333333;
+            --text-light: #FFFFFF;
+            --card-bg: #FFFFFF;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --topup-accent: #6f42c1;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--neutral-light);
+            padding-top: 60px;
+            /* Padding bawah diperbesar untuk 2 footer */
+            padding-bottom: 150px; 
+        }
+        a { text-decoration: none; color: inherit; }
+
+        .fixed-navbar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background-color: var(--primary-blue); color: var(--text-light);
+            padding: 12px 20px; display: flex; justify-content: center;
+            align-items: center; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .header-logo h1 {
+            font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem;
+            letter-spacing: 1.5px; margin: 0; line-height: 1;
+        }
+        .header-logo .icon {
+            color: var(--accent-orange); font-size: 1.8rem;
+            vertical-align: middle; margin: 0 5px;
+        }
+        
+        .tagline-section {
+            background-color: var(--primary-blue); color: var(--text-light);
+            padding: 15px 20px 25px 20px; text-align: center;
+            border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;
+        }
+        .header-tagline { font-size: 0.9rem; opacity: 0.85; max-width: 400px; margin: 0 auto; }
+
+        .game-accordion { padding: 15px; }
+        .accordion-item { border-radius: 12px !important; overflow: hidden; border: none; box-shadow: 0 2px 8px var(--shadow); }
+        .accordion-button {
+            background-color: var(--card-bg); color: var(--neutral-dark);
+            font-size: 1.1rem; font-weight: 600; padding: 15px 20px;
+        }
+        .accordion-button:not(.collapsed) { background-color: var(--primary-blue); color: var(--text-light); box-shadow: none; }
+        .accordion-button:focus { box-shadow: none; }
+        .accordion-button::after { filter: brightness(0) invert(0.5); }
+        .accordion-button:not(.collapsed)::after { filter: brightness(0) invert(1); }
+        .game-logo { width: 40px; height: 40px; border-radius: 8px; margin-right: 15px; }
+        
+        .topup-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 10px; padding: 15px; background-color: var(--neutral-light);
+        }
+        .topup-card {
+            background-color: var(--card-bg); border-radius: 8px; padding: 12px;
+            text-align: center; border: 2px solid transparent; cursor: pointer; transition: all 0.2s ease;
+        }
+        .topup-card.selected {
+            border-color: var(--topup-accent); box-shadow: 0 0 10px rgba(111, 66, 193, 0.3);
+        }
+        .topup-card .hot-label {
+            background-color: #ffc107; font-size: 0.7rem; font-weight: 600; padding: 2px 8px;
+            border-radius: 5px; color: var(--neutral-dark); display: inline-block; margin-bottom: 8px;
+        }
+        .topup-card .amount { font-weight: 600; }
+        .topup-card .price { font-size: 0.9rem; color: var(--neutral-dark); font-weight: 500;}
+        
+        .checkout-footer {
+            position: fixed; bottom: -150px; left: 0; width: 100%;
+            background-color: var(--card-bg); padding: 15px;
+            box-shadow: 0 -4px 15px var(--shadow); z-index: 999; /* di bawah footer utama */
+            display: flex; justify-content: space-between; align-items: center;
+            transition: bottom 0.3s ease-in-out;
+        }
+        .checkout-footer.show { bottom: 60px; } /* Muncul di atas footer utama */
+        .checkout-price .item-name { font-size: 0.8rem; color: #666;}
+        .checkout-price .total-price { font-size: 1.2rem; font-weight: 700; color: var(--neutral-dark);}
+        .btn-buy {
+            background-color: var(--topup-accent); color: var(--text-light);
+            padding: 12px 30px; border-radius: 8px; font-weight: 600; border: none;
+        }
+
+        /* Footer Kembali ke Beranda */
+        .footer-action {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background-color: var(--card-bg); padding: 10px 15px;
+            box-shadow: 0 -2px 15px var(--shadow); z-index: 1000;
+        }
+        .btn-back-home {
+            display: block; width: 100%; text-align: center;
+            background-color: var(--primary-blue); color: var(--text-light);
+            padding: 12px; border-radius: 10px; font-weight: 600;
+        }
+
+        .modal-header, .modal-footer { border: none; }
+        #pesan-wa-btn { background-color: #25D366; color: white; width: 100%; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <nav class="fixed-navbar">
+        <div class="header-logo">
+            <h1>OUTLET<i class="bi bi-gear-fill icon"></i>TEKNIK</h1>
+        </div>
+    </nav>
+    <div class="tagline-section">
+        <p class="header-tagline">
+            Top Up Cepat, Aman, dan Terpercaya untuk Game Favoritmu!
+        </p>
+    </div>
+
+    <div class="accordion game-accordion" id="topup-container"></div>
+    
+    <div class="checkout-footer" id="checkout-footer">
+        <div class="checkout-price">
+            <div id="item-name-footer" class="item-name">Pilih item...</div>
+            <div id="item-price-footer" class="total-price">Rp 0</div>
+        </div>
+        <button class="btn-buy" id="buy-now-btn" data-bs-toggle="modal" data-bs-target="#orderModal" disabled>
+            Beli Sekarang
+        </button>
+    </div>
+
+    <div class="footer-action">
+        <a href="index.html" class="btn-back-home"><i class="bi bi-arrow-left-circle-fill"></i> Kembali ke Beranda</a>
+    </div>
+
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderModalLabel">Lengkapi Data Pesanan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="modal-order-summary" class="mb-3"></div>
+                    <div class="mb-2">
+                        <label for="customer" class="form-label">Nama Pemesan</label>
+                        <input type="text" id="customer" class="form-control" placeholder="Tulis nama lengkap Anda">
+                    </div>
+                    <div>
+                        <label for="game-id" class="form-label">User ID Game</label>
+                        <input type="text" id="game-id" class="form-control" placeholder="Contoh: 12345678 (1234)">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success w-100" id="pesan-wa-btn">
+                        <i class="bi bi-whatsapp"></i> Lanjutkan Pembayaran
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    const topupData = [
+        {
+            gameId: "ml",
+            gameName: "Mobile Legends",
+            logo: "https://i.ibb.co/6PdhS5K/ml-logo.jpg",
+            products: [
+                { name: "100 Diamonds", price: 14203, description: "(50+50)", hot: true },
+                { name: "300 Diamonds", price: 42365, description: "(150+150)", hot: true },
+                { name: "500 Diamonds", price: 70632, description: "(250+250)", hot: true },
+                { name: "1000 Diamonds", price: 142025, description: "(500+500)", hot: false }
+            ]
+        },
+        {
+            gameId: "ff",
+            gameName: "Free Fire",
+            logo: "https://i.ibb.co/h722X63/ff-logo.jpg",
+            products: [
+                { name: "70 Diamonds", price: 9900, description: "Bonus 5%", hot: true },
+                { name: "140 Diamonds", price: 19800, description: "Bonus 5%", hot: true },
+                { name: "355 Diamonds", price: 49500, description: "Bonus 10%", hot: true },
+                { name: "720 Diamonds", price: 99000, description: "Bonus 10%", hot: false }
+            ]
+        },
+        {
+            gameId: "gi",
+            gameName: "Genshin Impact",
+            logo: "https://i.ibb.co/qN1rN2j/genshin-logo.jpg",
+            products: [
+                { name: "60 Genesis Crystal", price: 16000, description: "First top-up bonus", hot: false },
+                { name: "300 Genesis Crystal", price: 79000, description: "First top-up bonus", hot: true },
+                { name: "980 Genesis Crystal", price: 249000, description: "First top-up bonus", hot: true },
+                { name: "1980 Genesis Crystal", price: 479000, description: "First top-up bonus", hot: false }
+            ]
+        }
+    ];
+
+    const topupContainer = document.getElementById('topup-container');
+    const checkoutFooter = document.getElementById('checkout-footer');
+    const itemNameFooter = document.getElementById('item-name-footer');
+    const itemPriceFooter = document.getElementById('item-price-footer');
+    const buyNowBtn = document.getElementById('buy-now-btn');
+    const modalOrderSummaryEl = document.getElementById('modal-order-summary');
+    const pesanWaBtn = document.getElementById('pesan-wa-btn');
+    let selectedProduct = null;
+
+    function renderTopupOptions() {
+        let allHTML = '';
+        topupData.forEach(game => {
+            let productsHTML = '';
+            game.products.forEach(product => {
+                productsHTML += `
+                    <div class="topup-card" data-gamename="${game.gameName}" data-name="${product.name}" data-price="${product.price}">
+                        ${product.hot ? '<div class="hot-label">🔥 HOT</div>' : ''}
+                        <div class="amount">${product.name}</div>
+                        <div class="price">Rp ${product.price.toLocaleString('id-ID')}</div>
+                    </div>
+                `;
+            });
+            allHTML += `
+                <div class="accordion-item mb-3">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${game.gameId}">
+                            <img src="${game.logo}" alt="${game.gameName}" class="game-logo">
+                            ${game.gameName}
+                        </button>
+                    </h2>
+                    <div id="collapse-${game.gameId}" class="accordion-collapse collapse" data-bs-parent="#topup-container">
+                        <div class="topup-grid">${productsHTML}</div>
+                    </div>
+                </div>
+            `;
+        });
+        topupContainer.innerHTML = allHTML;
+    }
+
+    function attachEventListeners() {
+        const allTopupCards = document.querySelectorAll('.topup-card');
+        allTopupCards.forEach(card => {
+            card.addEventListener('click', () => {
+                // === LOGIKA BARU UNTUK BATALKAN PESANAN ===
+                if (card.classList.contains('selected')) {
+                    // Jika kartu yang sudah dipilih diklik lagi, batalkan pilihan
+                    card.classList.remove('selected');
+                    selectedProduct = null;
+                    buyNowBtn.disabled = true;
+                    checkoutFooter.classList.remove('show');
+                } else {
+                    // Jika kartu lain yang dipilih
+                    allTopupCards.forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    
+                    selectedProduct = {
+                        game: card.dataset.gamename,
+                        name: card.dataset.name,
+                        price: parseInt(card.dataset.price)
+                    };
+
+                    itemNameFooter.textContent = `${selectedProduct.game} - ${selectedProduct.name}`;
+                    itemPriceFooter.textContent = `Rp ${selectedProduct.price.toLocaleString('id-ID')}`;
+                    buyNowBtn.disabled = false;
+                    checkoutFooter.classList.add('show');
+                }
+            });
+        });
+
+        pesanWaBtn.addEventListener('click', () => {
+            const customer = document.getElementById('customer').value;
+            const gameId = document.getElementById('game-id').value;
+            if (!customer.trim() || !gameId.trim()) {
+                alert('Tolong isi Nama dan User ID Game Anda.');
+                return;
+            }
+            if (!selectedProduct) {
+                alert('Terjadi kesalahan. Silakan pilih ulang item.');
+                return;
+            }
+            const whatsappMessage = `Halo Admin, saya mau top up:\n\n*Game:* ${selectedProduct.game}\n*Item:* ${selectedProduct.name}\n\n*Nama Pemesan:* ${customer}\n*User ID Game:* ${gameId}\n\n*Total Pembayaran:* Rp ${selectedProduct.price.toLocaleString('id-ID')}\n\nMohon konfirmasi untuk proses pembayarannya. Terima kasih!`;
+            const whatsappUrl = `https://wa.me/6281281865275?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+        
+        const orderModal = document.getElementById('orderModal');
+        orderModal.addEventListener('show.bs.modal', () => {
+            if (selectedProduct) {
+                modalOrderSummaryEl.innerHTML = `
+                    <h6>Rincian Pesanan:</h6>
+                    <ul class="list-unstyled ms-2">
+                        <li><strong>Game:</strong> ${selectedProduct.game}</li>
+                        <li><strong>Item:</strong> ${selectedProduct.name}</li>
+                        <li><strong>Harga:</strong> Rp ${selectedProduct.price.toLocaleString('id-ID')}</li>
+                    </ul>
+                `;
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderTopupOptions();
+        attachEventListeners();
+    });
+    </script>
+</body>
+</html>
