@@ -117,35 +117,48 @@
             flex-wrap: nowrap;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
-            gap: 15px;
+            gap: 12px; /* Jarak antar card sedikit dikurangi */
             padding: 5px 15px;
         }
         .horizontal-scroll-container::-webkit-scrollbar { display: none; }
         .horizontal-scroll-container { -ms-overflow-style: none; scrollbar-width: none; }
         
+        /* ======================================= */
+        /* === PERUBAHAN UKURAN CARD MERCH === */
+        /* ======================================= */
         .horizontal-scroll-container .product-card {
-            flex: 0 0 160px;
-            width: 160px;
+            flex: 0 0 130px; /* Lebar kartu dikurangi dari 160px */
+            width: 130px;
         }
         .horizontal-scroll-container .product-card .product-card-img {
-            height: 150px;
+            height: 120px; /* Tinggi gambar dikurangi dari 150px */
         }
+        .horizontal-scroll-container .product-card-info {
+            padding: 8px; /* Padding internal dikurangi */
+        }
+        .horizontal-scroll-container .product-title {
+            font-size: 0.8rem; /* Ukuran font judul dikurangi */
+            margin-bottom: 4px;
+        }
+        .horizontal-scroll-container .product-price {
+            font-size: 1rem; /* Ukuran font harga dikurangi */
+        }
+        .horizontal-scroll-container .product-store {
+            font-size: 0.7rem; /* Ukuran font toko dikurangi */
+        }
+        /* ======================================= */
 
         .offcanvas-header { border-bottom: 1px solid #eee;}
         .offcanvas-title { font-weight: 600; }
         
-        /* ================================================= */
-        /* PERUBAHAN CSS UNTUK GAMBAR DI MODAL/OFFCANVAS     */
-        /* ================================================= */
         .offcanvas-body .product-image { 
             width: 100%; 
-            height: 220px; /* Sedikit lebih tinggi untuk rasio yang lebih baik */
-            object-fit: contain; /* DIUBAH: dari 'cover' menjadi 'contain' */
+            height: 220px;
+            object-fit: contain;
             border-radius: 12px; 
             margin-bottom: 15px;
-            background-color: var(--neutral-light); /* TAMBAHAN: Latar belakang untuk area kosong */
+            background-color: var(--neutral-light);
         }
-        /* ================================================= */
         
         .offcanvas-body .product-name { font-size: 1.5rem; font-weight: 600; }
         .offcanvas-body .product-estimate { font-size: 0.9rem; color: #666; }
