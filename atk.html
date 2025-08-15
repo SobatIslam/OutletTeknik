@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kategori ATK & Umum - Outlet Teknik (OT)</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            --primary-blue: #0A2647;
+            --primary-blue-hover: #0E2F5A;
+            --accent-orange: #FF7B00;
+            --neutral-light: #F5F7FA;
+            --neutral-dark: #333333;
+            --text-light: #FFFFFF;
+            --card-bg: #FFFFFF;
+            --shadow: rgba(0, 0, 0, 0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--neutral-light);
+            color: var(--neutral-dark);
+            padding-top: 60px;
+        }
+        a { text-decoration: none; color: inherit; }
+
+        .fixed-navbar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background-color: var(--primary-blue); color: var(--text-light);
+            padding: 12px 20px; display: flex; justify-content: center;
+            align-items: center; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .header-logo h1 {
+            font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem;
+            letter-spacing: 1.5px; margin: 0; line-height: 1;
+        }
+        .header-logo .icon {
+            color: var(--accent-orange); font-size: 1.8rem;
+            vertical-align: middle; margin: 0 5px;
+        }
+        
+        .tagline-section {
+            background-color: var(--primary-blue); color: var(--text-light);
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;
+            transition: background-color 0.2s ease;
+        }
+        a.tagline-link:hover .tagline-section {
+            background-color: var(--primary-blue-hover);
+        }
+        .header-tagline { 
+            font-size: 1rem; 
+            font-weight: 500;
+            margin: 0 auto; 
+        }
+        
+        .main-content { padding: 20px 0; }
+
+        .view-navigation {
+            display: flex;
+            gap: 10px;
+            padding: 0 15px;
+            margin-bottom: 25px;
+        }
+        .view-btn {
+            flex: 1;
+            padding: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            border: 1px solid #ddd;
+            background-color: var(--card-bg);
+            color: var(--neutral-dark);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .view-btn.active {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            border-color: var(--primary-blue);
+        }
+
+        .store-group { margin-bottom: 35px; }
+        .store-header {
+            display: flex; align-items: center; gap: 12px;
+            padding: 0 15px; margin-bottom: 15px;
+        }
+        .store-logo {
+            width: 40px; height: 40px; border-radius: 50%;
+            object-fit: cover; border: 2px solid #eee;
+        }
+        .store-name { font-size: 1.1rem; font-weight: 600; margin: 0; }
+        
+        .product-grid { 
+            column-count: 2; column-gap: 15px; padding: 0 15px;
+        }
+        .product-grid .product-card {
+             width: 100%; display: inline-block; 
+             margin-bottom: 15px; break-inside: avoid;
+        }
+        .product-card {
+            background-color: var(--card-bg); border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow); overflow: hidden;
+            cursor: pointer; transition: transform 0.2s ease;
+        }
+        .product-card:hover { transform: translateY(-5px); }
+        
+        .product-image-wrapper { position: relative; }
+        .product-card-img { 
+            width: 100%; height: auto; object-fit: cover; 
+            background-color: #eee; display: block;
+        }
+
+        .new-sticker {
+            position: absolute; top: 8px; left: 8px;
+            background-color: var(--accent-orange); color: white;
+            padding: 3px 8px; font-size: 0.7rem; font-weight: 600;
+            border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .product-card-info { padding: 12px; }
+        .product-title {
+            font-size: 0.9rem; font-weight: 600; margin-bottom: 5px;
+            overflow: hidden; text-overflow: ellipsis; display: -webkit-box;
+            -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+        }
+        .product-price { font-size: 1.1rem; font-weight: 700; color: var(--neutral-dark); margin-bottom: 2px; }
+        .product-store { font-size: 0.75rem; color: #888; }
+        
+        .offcanvas-header { border-bottom: 1px solid #eee;}
+        .offcanvas-title { font-weight: 600; }
+        .offcanvas-body .product-image { 
+            width: 100%; height: 220px; object-fit: contain;
+            border-radius: 12px; margin-bottom: 15px;
+            background-color: var(--neutral-light);
+        }
+        .offcanvas-body .product-name { font-size: 1.5rem; font-weight: 600; }
+        .offcanvas-body .product-estimate { font-size: 0.9rem; color: #666; }
+        .offcanvas-body .product-description { font-size: 1rem; margin-top: 10px; }
+        .offcanvas-body .price-and-quantity { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+        .offcanvas-body .product-price-detail { font-size: 1.8rem; font-weight: 700; color: var(--accent-orange); }
+        .menu-action { display: flex; align-items: center; gap: 8px; }
+        .menu-action .btn {
+            width: 40px; height: 40px; border-radius: 50%; padding: 0; font-size: 20px; border: 1px solid #ddd;
+            background-color: var(--neutral-light); color: var(--neutral-dark);
+        }
+        .jumlah { font-weight: 600; font-size: 1.2rem; min-width: 30px; text-align: center; }
+        #buat-pesanan-btn { font-weight: 600; padding: 12px; }
+        
+        .modal-header, .modal-footer { border: none; }
+        #pesan-wa-btn { background-color: #25D366; color: white; width: 100%; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <nav class="fixed-navbar">
+        <div class="header-logo">
+            <a href="index.html" style="color: white; text-decoration: none;">
+                <h1>OUTLET<i class="bi bi-gear-fill icon"></i>TEKNIK</h1>
+            </a>
+        </div>
+    </nav>
+    
+    <a href="index.html" class="tagline-link">
+        <div class="tagline-section">
+            <p class="header-tagline"><i class="bi bi-house-door-fill"></i> Kembali ke Beranda</p>
+        </div>
+    </a>
+
+    <main class="main-content">
+        <div class="view-navigation">
+            <div class="view-btn active" id="btn-random">Acak</div>
+            <div class="view-btn" id="btn-store">Berdasarkan Toko</div>
+        </div>
+        
+        <div id="content-random">
+            </div>
+
+        <div id="content-by-store" style="display: none;">
+            </div>
+    </main>
+    
+    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="productDetailOffcanvas" style="height: auto; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Detail Produk</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <img src="" id="offcanvas-img" class="product-image" alt="Gambar Produk">
+            <h2 id="offcanvas-name" class="product-name">Nama Produk</h2>
+            <p id="offcanvas-estimate" class="product-estimate">Estimasi Pengiriman</p>
+            <p id="offcanvas-description" class="product-description">Deskripsi produk...</p>
+            <div class="price-and-quantity">
+                <span id="offcanvas-price" class="product-price-detail">Rp 0</span>
+                <div class="menu-action">
+                    <button class="btn" id="decrease-qty">-</button>
+                    <div class="jumlah"><b id="offcanvas-qty">1</b></div>
+                    <button class="btn" id="increase-qty">+</button>
+                </div>
+            </div>
+            <button class="btn btn-primary w-100 mt-4" id="buat-pesanan-btn">Buat Pesanan</button>
+        </div>
+    </div>
+
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Lengkapi Pesanan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-2">
+                        <label for="customer" class="form-label">Nama Pemesan</label>
+                        <input type="text" id="customer" class="form-control" placeholder="Tulis nama lengkap Anda">
+                    </div>
+                    <div>
+                        <label for="alamat" class="form-label">Alamat Ketemuan di Kampus</label>
+                        <input type="text" id="alamat" class="form-control" placeholder="Contoh: Depan Gedung A">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success w-100" id="pesan-wa-btn">
+                        <i class="bi bi-whatsapp"></i> Kirim ke Penjual
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="database.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const randomContainer = document.getElementById('content-random');
+            const byStoreContainer = document.getElementById('content-by-store');
+            
+            const btnRandom = document.getElementById('btn-random');
+            const btnStore = document.getElementById('btn-store');
+
+            let allProducts = [];
+            let currentProduct = {};
+
+            const detailOffcanvasEl = document.getElementById('productDetailOffcanvas');
+            const detailOffcanvas = new bootstrap.Offcanvas(detailOffcanvasEl);
+            const orderModalEl = document.getElementById('orderModal');
+            const orderModal = new bootstrap.Modal(orderModalEl);
+            
+            const offcanvasImg = document.getElementById('offcanvas-img');
+            const offcanvasName = document.getElementById('offcanvas-name');
+            const offcanvasEstimate = document.getElementById('offcanvas-estimate');
+            const offcanvasDescription = document.getElementById('offcanvas-description');
+            const offcanvasPrice = document.getElementById('offcanvas-price');
+            const offcanvasQty = document.getElementById('offcanvas-qty');
+
+            const today = new Date('2025-08-15');
+            const threeDaysAgo = new Date(today);
+            threeDaysAgo.setDate(today.getDate() - 3);
+
+            function loadAndProcessProducts() {
+                if (typeof storeData !== 'undefined') {
+                    storeData.forEach(store => {
+                        store.products.forEach(product => {
+                            allProducts.push({ ...product, storeName: store.storeName, waNumber: store.waNumber, storeLogo: store.storeLogo });
+                        });
+                    });
+                }
+            }
+            
+            function isNewProduct(product) {
+                const uploadDate = new Date(product.tanggalUpload);
+                return uploadDate >= threeDaysAgo && uploadDate <= today;
+            }
+
+            function createProductCardHTML(product) {
+                const newSticker = isNewProduct(product) ? '<div class="new-sticker">BARU</div>' : '';
+                return `
+                    <div class="product-card" data-product-id="${product.id}">
+                        <div class="product-image-wrapper">
+                            ${newSticker}
+                            <img src="${product.image}" alt="${product.name}" class="product-card-img">
+                        </div>
+                        <div class="product-card-info">
+                            <div class="product-title">${product.name}</div>
+                            <div class="product-price">Rp ${product.price.toLocaleString('id-ID')}</div>
+                            <div class="product-store">dari ${product.storeName}</div>
+                        </div>
+                    </div>`;
+            }
+            
+            function renderRandomView() {
+                const targetProducts = allProducts.filter(p => p.kategori === 'Alat Perkuliahan').sort(() => Math.random() - 0.5);
+                let productsHTML = `<div class="product-grid">`;
+                targetProducts.forEach(product => {
+                    productsHTML += createProductCardHTML(product);
+                });
+                productsHTML += `</div>`;
+                randomContainer.innerHTML = productsHTML;
+            }
+
+            function renderByStoreView() {
+                let finalHTML = '';
+                storeData.forEach(store => {
+                    const targetProducts = store.products.filter(p => p.kategori === 'Alat Perkuliahan');
+                    if (targetProducts.length > 0) {
+                        let storeHTML = `<section class="store-group">`;
+                        storeHTML += `
+                            <div class="store-header">
+                                <img src="${store.storeLogo}" alt="Logo ${store.storeName}" class="store-logo">
+                                <h3 class="store-name">${store.storeName}</h3>
+                            </div>`;
+                        
+                        let productsHTML = `<div class="product-grid">`;
+                        targetProducts.forEach(product => {
+                            const fullProductData = allProducts.find(p => p.id === product.id);
+                            if(fullProductData) productsHTML += createProductCardHTML(fullProductData);
+                        });
+                        productsHTML += `</div>`;
+                        
+                        storeHTML += productsHTML;
+                        storeHTML += `</section>`;
+                        finalHTML += storeHTML;
+                    }
+                });
+                byStoreContainer.innerHTML = finalHTML;
+            }
+
+            function updateOffcanvasPrice(quantity) {
+                if (!currentProduct || !currentProduct.price) return;
+                const totalPrice = currentProduct.price * parseInt(quantity);
+                offcanvasPrice.textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+            }
+
+            function attachMainEventListeners() {
+                btnRandom.addEventListener('click', () => {
+                    btnRandom.classList.add('active');
+                    btnStore.classList.remove('active');
+                    randomContainer.style.display = 'block';
+                    byStoreContainer.style.display = 'none';
+                    if(randomContainer.innerHTML.trim() === '') renderRandomView();
+                    attachProductCardListeners();
+                });
+
+                btnStore.addEventListener('click', () => {
+                    btnStore.classList.add('active');
+                    btnRandom.classList.remove('active');
+                    byStoreContainer.style.display = 'block';
+                    randomContainer.style.display = 'none';
+                    if(byStoreContainer.innerHTML.trim() === '') renderByStoreView();
+                    attachProductCardListeners();
+                });
+
+                document.getElementById('increase-qty').addEventListener('click', () => {
+                    let qty = parseInt(offcanvasQty.textContent);
+                    qty++;
+                    offcanvasQty.textContent = qty;
+                    updateOffcanvasPrice(qty);
+                });
+
+                document.getElementById('decrease-qty').addEventListener('click', () => {
+                    let qty = parseInt(offcanvasQty.textContent);
+                    if (qty > 1) {
+                        qty--;
+                        offcanvasQty.textContent = qty;
+                        updateOffcanvasPrice(qty);
+                    }
+                });
+                
+                document.getElementById('buat-pesanan-btn').addEventListener('click', () => orderModal.show());
+
+                document.getElementById('pesan-wa-btn').addEventListener('click', () => {
+                    const customer = document.getElementById('customer').value;
+                    const alamat = document.getElementById('alamat').value;
+                    const quantity = offcanvasQty.textContent;
+
+                    if (!customer.trim() || !alamat.trim()) {
+                        alert('Harap isi nama dan alamat ketemuan Anda.');
+                        return;
+                    }
+
+                    const totalPrice = currentProduct.price * parseInt(quantity);
+                    const whatsappMessage = `Halo kak, saya mau pesan dari *${currentProduct.storeName}*:\n\n*Pesanan:*\n- ${currentProduct.name} (x${quantity})\n\n*Nama Pemesan:* ${customer}\n*Lokasi Ketemuan:* ${alamat}\n\n*Total Pembayaran:* Rp ${totalPrice.toLocaleString('id-ID')}\n\nMohon konfirmasinya. Terima kasih!`;
+                    const whatsappUrl = `https://wa.me/${currentProduct.waNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+                    
+                    window.open(whatsappUrl, '_blank');
+                    orderModal.hide();
+                    detailOffcanvas.hide();
+                });
+            }
+
+            function attachProductCardListeners() {
+                document.querySelectorAll('.product-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const productId = card.dataset.productId;
+                        currentProduct = allProducts.find(p => p.id === productId);
+                        
+                        if (currentProduct) {
+                            offcanvasImg.src = currentProduct.image;
+                            offcanvasName.textContent = currentProduct.name;
+                            offcanvasEstimate.textContent = `Estimasi: ${currentProduct.estimasi}`;
+                            offcanvasDescription.textContent = currentProduct.description;
+                            offcanvasQty.textContent = '1';
+                            updateOffcanvasPrice(1);
+                            detailOffcanvas.show();
+                        }
+                    });
+                });
+            }
+            
+            loadAndProcessProducts();
+            renderRandomView();
+            attachMainEventListeners();
+            attachProductCardListeners();
+        });
+    </script>
+</body>
+</html>

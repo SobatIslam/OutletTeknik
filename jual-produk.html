@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jual Produk - Outlet Teknik (OT)</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            --primary-blue: #0A2647;
+            --primary-blue-hover: #0E2F5A;
+            --accent-orange: #FF7B00;
+            --neutral-light: #F5F7FA;
+            --neutral-dark: #333333;
+            --text-light: #FFFFFF;
+            --card-bg: #FFFFFF;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--neutral-light);
+            padding-top: 60px;
+        }
+        a { text-decoration: none; color: inherit; }
+
+        .fixed-navbar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background-color: var(--primary-blue); color: var(--text-light);
+            padding: 12px 20px; display: flex; justify-content: center;
+            align-items: center; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .header-logo h1 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; }
+
+        .tagline-section {
+            margin-top: 15px;
+            background-color: var(--primary-blue); color: var(--text-light);
+            padding: 10px 20px;
+            text-align: center;
+            border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;
+            margin-bottom: 20px;
+        }
+        .header-tagline { font-size: 1rem; font-weight: 500; margin: 0; }
+        
+        .main-content { padding: 0 15px 25px 15px; }
+
+        .action-container {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .action-card {
+            flex: 1;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            background-color: var(--card-bg);
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-color: var(--primary-blue);
+        }
+        .action-card i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+        .action-card span {
+            font-weight: 600;
+            display: block;
+        }
+
+        .form-container {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: center; /* Menengahkan ikon */
+        }
+        .form-icon {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+        .form-label { 
+            font-weight: 600; 
+            color: #555; 
+            text-align: left; /* Mengembalikan perataan teks label ke kiri */
+            width: 100%;
+        }
+        .submit-button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+        .submit-btn {
+            background-color: #25D366; border-color: #25D366;
+            font-weight: 600; padding: 12px; flex-grow: 2;
+        }
+        .back-btn {
+            flex-grow: 1;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+        .accordion-button:focus {
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="fixed-navbar">
+        <div class="header-logo">
+            <a href="index.html" style="color: white;"><h1>OUTLET TEKNIK</h1></a>
+        </div>
+    </nav>
+    
+    <div class="tagline-section">
+        <p class="header-tagline" id="page-tagline">Jual Produk Anda</p>
+    </div>
+
+    <main class="main-content">
+        <div id="initial-view">
+            <div class="action-container">
+                <div id="show-register-btn" class="action-card">
+                    <i class="bi bi-shop-window"></i>
+                    <span>Daftarkan Toko</span>
+                </div>
+                <div id="show-login-btn" class="action-card">
+                    <i class="bi bi-box-seam"></i>
+                    <span>Jual Produk</span>
+                </div>
+            </div>
+            <div class="accordion" id="termsAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                            Syarat & Ketentuan Penjual
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#termsAccordion">
+                        <div class="accordion-body">
+                            <strong>1. Pendaftaran:</strong> Setiap penjual wajib mendaftarkan tokonya terlebih dahulu untuk mendapatkan ID Toko dan Password.
+                            <br><br>
+                            <strong>2. Upload Gambar:</strong> Semua gambar (logo dan produk) wajib diunggah ke Google Drive. Pastikan link diatur ke "Siapa saja yang memiliki link" agar dapat diakses. Link dari layanan lain akan ditolak.
+                            <br><br>
+                            <strong>3. Verifikasi:</strong> Semua pendaftaran toko dan penambahan produk akan diverifikasi oleh Admin. Admin berhak menolak pendaftaran jika tidak sesuai.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="register-view" style="display: none;">
+            <div class="form-container">
+                <i class="bi bi-shop-window form-icon"></i>
+                <form id="register-form">
+                    <div class="mb-3">
+                        <label for="storeName" class="form-label">Nama Toko</label>
+                        <input type="text" class="form-control" id="storeName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="sellerName" class="form-label">Nama Lengkap Penjual</label>
+                        <input type="text" class="form-control" id="sellerName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="storeLogo" class="form-label">URL Logo Toko</label>
+                        <input type="url" class="form-control" id="storeLogo" placeholder="Masukan link Google Drive" required>
+                        <div class="form-text text-start">Pastikan link diatur ke "Siapa saja yang memiliki link".</div>
+                    </div>
+                    <div class="submit-button-group">
+                        <button type="button" class="btn btn-secondary back-btn"><i class="bi bi-arrow-left"></i> Kembali</button>
+                        <button type="submit" class="btn btn-success submit-btn"><i class="bi bi-whatsapp"></i> Kirim</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="login-view" style="display: none;">
+            <div class="form-container">
+                <i class="bi bi-box-seam form-icon"></i>
+                <form id="login-form">
+                    <div class="mb-3">
+                        <label for="storeIdInput" class="form-label">ID Toko</label>
+                        <input type="text" class="form-control" id="storeIdInput" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="storePasswordInput" class="form-label">Password Toko</label>
+                        <input type="password" class="form-control" id="storePasswordInput" required>
+                    </div>
+                    <div class="submit-button-group">
+                        <button type="button" class="btn btn-secondary back-btn"><i class="bi bi-arrow-left"></i> Kembali</button>
+                        <button type="submit" class="btn btn-primary submit-btn">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="add-product-view" style="display: none;">
+             <div class="form-container">
+                <i class="bi bi-box-seam form-icon"></i>
+                <h5 class="mb-3" id="welcome-seller"></h5>
+                <form id="add-product-form">
+                    <div class="mb-3">
+                        <label for="productName" class="form-label">Nama Produk</label>
+                        <input type="text" class="form-control" id="productName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productDesc" class="form-label">Deskripsi Singkat</label>
+                        <textarea class="form-control" id="productDesc" rows="2" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productCategory" class="form-label">Kategori</label>
+                        <select class="form-select" id="productCategory" required>
+                            <option value="">-- Pilih Kategori --</option>
+                            <option value="Makanan">Makanan</option>
+                            <option value="Alat Perkuliahan">Alat Perkuliahan</option>
+                            <option value="Merch">Merch</option>
+                            <option value="Jastip">Jastip</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Harga (Rp)</label>
+                        <input type="number" class="form-control" id="productPrice" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productImage" class="form-label">URL Foto Produk</label>
+                        <input type="url" class="form-control" id="productImage" placeholder="Masukan link Google Drive" required>
+                        <div class="form-text text-start">Pastikan link diatur ke "Siapa saja yang memiliki link".</div>
+                    </div>
+                    <div class="submit-button-group">
+                        <button type="button" class="btn btn-secondary back-btn"><i class="bi bi-arrow-left"></i> Kembali</button>
+                        <button type="submit" class="btn btn-success submit-btn"><i class="bi bi-whatsapp"></i> Kirim Produk</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="database.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const adminWA = "6281281865275";
+
+            const initialView = document.getElementById('initial-view');
+            const registerView = document.getElementById('register-view');
+            const loginView = document.getElementById('login-view');
+            const addProductView = document.getElementById('add-product-view');
+            const pageTagline = document.getElementById('page-tagline');
+
+            const showRegisterBtn = document.getElementById('show-register-btn');
+            const showLoginBtn = document.getElementById('show-login-btn');
+            const backBtns = document.querySelectorAll('.back-btn');
+
+            let loggedInStore = null;
+
+            const taglines = {
+                initial: "Jual Produk Anda",
+                register: "Formulir Pendaftaran Toko",
+                login: "Login Penjual",
+                addProduct: "Formulir Jual Produk"
+            };
+
+            function switchView(viewToShow, tagline) {
+                initialView.style.display = 'none';
+                registerView.style.display = 'none';
+                loginView.style.display = 'none';
+                addProductView.style.display = 'none';
+                viewToShow.style.display = 'block';
+                pageTagline.textContent = tagline;
+            }
+
+            showRegisterBtn.addEventListener('click', () => switchView(registerView, taglines.register));
+            showLoginBtn.addEventListener('click', () => switchView(loginView, taglines.login));
+            backBtns.forEach(btn => btn.addEventListener('click', () => {
+                document.getElementById('login-form').reset();
+                switchView(initialView, taglines.initial)
+            }));
+            
+            function isValidGoogleDriveLink(url) {
+                return url.includes('drive.google.com');
+            }
+
+            document.getElementById('register-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const storeLogoInput = document.getElementById('storeLogo');
+                if (!isValidGoogleDriveLink(storeLogoInput.value)) {
+                    alert('URL Logo Toko harus dari Google Drive.');
+                    storeLogoInput.focus();
+                    return;
+                }
+                const storeName = document.getElementById('storeName').value;
+                const sellerName = document.getElementById('sellerName').value;
+                const message = `*PENDAFTARAN TOKO BARU*\n\n*Nama Toko:* ${storeName}\n*Nama Penjual:* ${sellerName}\n*URL Logo:* ${storeLogoInput.value}\n\nMohon berikan ID Toko dan Password.`;
+                const whatsappUrl = `https://wa.me/${adminWA}?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+            });
+
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const storeId = document.getElementById('storeIdInput').value;
+                const password = document.getElementById('storePasswordInput').value;
+                
+                const store = storeData.find(s => s.storeId === storeId);
+                if (store && store.password === password) {
+                    loggedInStore = store;
+                    document.getElementById('welcome-seller').textContent = `Menambah produk untuk: ${store.storeName}`;
+                    switchView(addProductView, taglines.addProduct);
+                } else {
+                    alert('ID Toko atau Password salah!');
+                }
+            });
+
+            document.getElementById('add-product-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const productImageInput = document.getElementById('productImage');
+                if (!isValidGoogleDriveLink(productImageInput.value)) {
+                    alert('URL Foto Produk harus dari Google Drive.');
+                    productImageInput.focus();
+                    return;
+                }
+                if (!loggedInStore) return;
+                
+                const productName = document.getElementById('productName').value;
+                const productDesc = document.getElementById('productDesc').value;
+                const productCategory = document.getElementById('productCategory').value;
+                const productPrice = document.getElementById('productPrice').value;
+
+                const message = `*PENAMBAHAN PRODUK BARU*\n\n*Dari Toko:* ${loggedInStore.storeName} (ID: ${loggedInStore.storeId})\n\n*Nama Produk:* ${productName}\n*Deskripsi:* ${productDesc}\n*Kategori:* ${productCategory}\n*Harga:* Rp ${parseInt(productPrice).toLocaleString('id-ID')}\n*URL Foto:* ${productImageInput.value}`;
+                const whatsappUrl = `https://wa.me/${adminWA}?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
